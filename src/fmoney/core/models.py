@@ -17,3 +17,20 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Asset(models.Model):
+    name = models.CharField('nome', max_length=255)
+    date = models.DateField('data de compra')
+    symbol = models.CharField('simbolo', max_length=255)
+    shares = models.DecimalField('cotas', max_digits=10, decimal_places=2)
+    commission = models.DecimalField('taxas', max_digits=10, decimal_places=2)
+    type = models.CharField('operação', max_length=255)
+    note = models.CharField('notas', max_length=255)
+
+    class Meta:
+        verbose_name = 'ativo'
+        verbose_name_plural = 'ativos'
+
+    def __str__(self):
+        return self.symbol
