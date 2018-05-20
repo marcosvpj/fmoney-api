@@ -32,7 +32,7 @@ class Asset(models.Model):
     shares = models.DecimalField('cotas', max_digits=10, decimal_places=2)
     commission = models.DecimalField('taxas', max_digits=10, decimal_places=2)
     type = models.CharField('operação', max_length=2, choices=operation_values, default='B')
-    note = models.CharField('notas', max_length=255)
+    note = models.CharField('notas', max_length=255, blank=True)
 
     class Meta:
         verbose_name = 'ativo'
