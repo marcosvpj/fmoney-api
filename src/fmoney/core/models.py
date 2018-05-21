@@ -38,7 +38,7 @@ class Asset(models.Model):
     date = models.DateField('data de compra')
     symbol = models.CharField('simbolo', max_length=255)
     shares = models.DecimalField('cotas', max_digits=10, decimal_places=2)
-    commission = models.DecimalField('taxas', max_digits=10, decimal_places=2)
+    commission = models.DecimalField('taxas', max_digits=10, decimal_places=2, default=0)
     operation = models.CharField('operação', max_length=2, choices=operation_values, default=BUY)
     note = models.CharField('notas', max_length=255, blank=True)
     type = models.CharField('tipo', max_length=50, choices=type_values, default=SHARE)
