@@ -22,10 +22,12 @@ from fmoney.core.models import Asset
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('email','username')
+        fields = ('email', 'username')
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -35,18 +37,20 @@ class UserViewSet(viewsets.ModelViewSet):
 class AssetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Asset
-        fields = ('symbol','shares')
+        fields = ('symbol', 'shares')
+
 
 class AssetViewSet(viewsets.ModelViewSet):
     queryset = Asset.objects.all()
     serializer_class = AssetSerializer
+
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'assets', AssetViewSet)
 
 urlpatterns = [
-    #url(r'^$', views.home),
+    # url(r'^$', views.home),
     url(r'^', include(router.urls)),
     url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
