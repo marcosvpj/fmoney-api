@@ -1,4 +1,5 @@
 from django.db import models
+from decouple import config
 
 # Create your models here.
 
@@ -40,6 +41,10 @@ class Asset(models.Model):
     operation = models.CharField('operação', max_length=2, choices=operation_values, default=BUY)
     note = models.CharField('notas', max_length=255, blank=True)
     type = models.CharField('tipo', max_length=50, choices=type_values, default=SHARE)
+
+    def current_price(self):
+        config('ALPHAVANTAGE_TOKEN')
+        pass
 
     class Meta:
         verbose_name = 'ativo'
