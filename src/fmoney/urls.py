@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from fmoney.core import views
+from fmoney.core.models import Asset
 
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
@@ -30,8 +31,19 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
+class AssetSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Asset
+        fields = ('symbol','shares')
+
+class AssetViewSet(viewsets.ModelViewSet):
+    queryset = Asset.objects.all()
+    serializer_class = AssetSerializer
+
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'assets', AssetViewSet)
 
 urlpatterns = [
     #url(r'^$', views.home),
