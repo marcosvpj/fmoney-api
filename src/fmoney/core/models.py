@@ -1,5 +1,6 @@
 from django.db import models
 from decouple import config
+import requests
 
 # Create your models here.
 
@@ -42,9 +43,11 @@ class Asset(models.Model):
     note = models.CharField('notas', max_length=255, blank=True)
     type = models.CharField('tipo', max_length=50, choices=type_values, default=SHARE)
 
+    @property
     def current_price(self):
-        config('ALPHAVANTAGE_TOKEN')
-        pass
+        request = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol='+self.symbol+'&interval=1min&apikey='+config('ALPHAVANTAGE_TOKEN'))
+        last_tick = request.json()['Meta Data']['3. Last Refreshed']
+        return request.json()['Time Series (1min)'][last_tick]['4. close']
 
     class Meta:
         verbose_name = 'ativo'

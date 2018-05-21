@@ -37,7 +37,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class AssetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Asset
-        fields = ('symbol', 'shares', 'name', 'date', 'commission', 'type', 'note')
+        fields = ('symbol', 'shares', 'name', 'date', 'commission', 'type', 'note', 'current_price')
 
 
 class AssetViewSet(viewsets.ModelViewSet):
